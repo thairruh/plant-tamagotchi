@@ -1,4 +1,4 @@
-# Plant Tamagotchi 🌱
+# Plant Tamagotchi 
 A beginner-friendly ESP32 project: a pixel pet that reacts to a real plant's soil moisture.
 
 **Current progress:** We uploaded a Blink sketch to one ESP32. The sensor, display, and pet are **not yet tested**.
