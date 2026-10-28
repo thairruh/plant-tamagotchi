@@ -4,8 +4,19 @@
 void setupMoistureSensor() { analogReadResolution(12); }
 int readMoistureRaw() { return analogRead(MOISTURE_PIN); }
 MoistureLevel classifyMoisture(int rawValue) {
-  // TODO: Replace after measuring dry/healthy/wet SOIL readings.
-  // Don't guess thresholds or assume the reading direction.
-  (void)rawValue;
-  return MoistureLevel::UNKNOWN;
+  // outputs plant state based on current moisture reading
+  // thresholds decided using paper towels, can change once we get a plant
+  
+  if (rawValue >= 2400) {
+    return MoistureLevel::DRY;
+  }
+  
+  else if (rawValue < 1500 ) {
+    return MoistureLevel::TOO_WET;
+  }
+
+  else {
+    return MoistureLevel::HEALTHY;
+    }
+
 }
