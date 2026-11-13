@@ -7,7 +7,7 @@ MoistureLevel classifyMoisture(int rawValue) {
   // outputs plant state based on current moisture reading
   // thresholds decided using paper towels, can change once we get a plant
   
-  if (rawValue >= 2400) {
+  if (rawValue >= 2500) {
     return MoistureLevel::DRY;
   }
   

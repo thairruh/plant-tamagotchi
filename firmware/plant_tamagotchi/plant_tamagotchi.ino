@@ -7,12 +7,27 @@ void setup() {
   setupMoistureSensor();
   setupDisplay();
 }
+
 void loop() {
-  int raw = readMoistureRaw();
-  MoistureLevel moisture = classifyMoisture(raw);
-  PetMood mood = moodFromMoisture(moisture);
-  Serial.print("Raw moisture: ");
-  Serial.println(raw);
-  drawPet(mood); // Serial placeholder until TFT is implemented.
-  delay(1000);
+    static unsigned long lastSensorRead = 0;
+    static PetMood currentMood;
+    static bool firstRead = true;
+
+    unsigned long now = millis();
+
+    if (firstRead || now - lastSensorRead >= 1000) {
+        int raw = readMoistureRaw();
+        MoistureLevel moisture = classifyMoisture(raw);
+
+        currentMood = moodFromMoisture(moisture);
+
+        Serial.print("Raw moisture: ");
+        Serial.println(raw);
+
+        lastSensorRead = now;
+        firstRead = false;
+    }
+
+    drawPet(currentMood);
 }
+
